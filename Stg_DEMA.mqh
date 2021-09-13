@@ -39,7 +39,7 @@ INPUT ENUM_IDATA_SOURCE_TYPE DEMA_Indi_DEMA_SourceType = IDATA_BUILTIN;  // Sour
 struct Indi_DEMA_Params_Defaults : DEMAParams {
   Indi_DEMA_Params_Defaults()
       : DEMAParams(::DEMA_Indi_DEMA_Period, ::DEMA_Indi_DEMA_MA_Shift, ::DEMA_Indi_DEMA_Applied_Price,
-                   ::DEMA_Indi_DEMA_Shift, PERIOD_CURRENT, ::DEMA_Indi_DEMA_SourceType) {}
+                   ::DEMA_Indi_DEMA_Shift, /*PERIOD_CURRENT,*/ ::DEMA_Indi_DEMA_SourceType) {}
 };
 
 // Defines struct with default user strategy values.
@@ -54,17 +54,6 @@ struct Stg_DEMA_Params_Defaults : StgParams {
     Set(STRAT_PARAM_OCP, DEMA_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, DEMA_OrderCloseTime);
     Set(STRAT_PARAM_SOFT, DEMA_SignalOpenFilterTime);
-  }
-};
-
-// Struct to define strategy parameters to override.
-struct Stg_DEMA_Params : StgParams {
-  DEMAParams iparams;
-  StgParams sparams;
-
-  // Struct constructors.
-  Stg_DEMA_Params(DEMAParams &_iparams, StgParams &_sparams) : iparams(_iparams, _iparams.tf.GetTf()) {
-    sparams = _sparams;
   }
 };
 
