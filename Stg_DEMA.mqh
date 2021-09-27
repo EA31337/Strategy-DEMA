@@ -86,11 +86,11 @@ class Stg_DEMA : public Strategy {
                              stg_dema_h4, stg_dema_h8);
 #endif
     // Initialize indicator.
-    _stg_params.SetIndicator(new Indi_DEMA(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_DEMA(_stg_params, _tparams, _cparams, "DEMA");
+    _strat.SetIndicator(new Indi_DEMA(_indi_params));
     _stg_params.SetStops(_strat, _strat);
     return _strat;
   }
