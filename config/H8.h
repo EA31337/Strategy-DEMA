@@ -4,8 +4,8 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_DEMA_Params_H8 : DEMAParams {
-  Indi_DEMA_Params_H8() : DEMAParams(indi_dema_defaults, PERIOD_H8) {
+struct Indi_DEMA_Params_H8 : IndiDEIndiMAParams {
+  Indi_DEMA_Params_H8() : IndiDEIndiMAParams(indi_dema_defaults, PERIOD_H8) {
     period = 12;
     ma_shift = 0;
     applied_price = (ENUM_APPLIED_PRICE)0;

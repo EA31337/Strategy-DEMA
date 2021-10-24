@@ -32,10 +32,10 @@ INPUT ENUM_IDATA_SOURCE_TYPE DEMA_Indi_DEMA_SourceType = IDATA_BUILTIN;  // Sour
 // Structs.
 
 // Defines struct with default user indicator values.
-struct Indi_DEMA_Params_Defaults : DEMAParams {
+struct Indi_DEMA_Params_Defaults : IndiDEIndiMAParams {
   Indi_DEMA_Params_Defaults()
-      : DEMAParams(::DEMA_Indi_DEMA_Period, ::DEMA_Indi_DEMA_MA_Shift, ::DEMA_Indi_DEMA_Applied_Price,
-                   ::DEMA_Indi_DEMA_Shift) {
+      : IndiDEIndiMAParams(::DEMA_Indi_DEMA_Period, ::DEMA_Indi_DEMA_MA_Shift, ::DEMA_Indi_DEMA_Applied_Price,
+                           ::DEMA_Indi_DEMA_Shift) {
     SetDataSourceType(::DEMA_Indi_DEMA_SourceType);
   }
 };
@@ -74,12 +74,12 @@ class Stg_DEMA : public Strategy {
   static Stg_DEMA *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
     Indi_DEMA_Params_Defaults indi_dema_defaults;
-    DEMAParams _indi_params(indi_dema_defaults, _tf);
+    IndiDEIndiMAParams _indi_params(indi_dema_defaults, _tf);
     Stg_DEMA_Params_Defaults stg_dema_defaults;
     StgParams _stg_params(stg_dema_defaults);
 #ifdef __config__
-    SetParamsByTf<DEMAParams>(_indi_params, _tf, indi_dema_m1, indi_dema_m5, indi_dema_m15, indi_dema_m30, indi_dema_h1,
-                              indi_dema_h4, indi_dema_h8);
+    SetParamsByTf<IndiDEIndiMAParams>(_indi_params, _tf, indi_dema_m1, indi_dema_m5, indi_dema_m15, indi_dema_m30,
+                                      indi_dema_h1, indi_dema_h4, indi_dema_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_dema_m1, stg_dema_m5, stg_dema_m15, stg_dema_m30, stg_dema_h1,
                              stg_dema_h4, stg_dema_h8);
 #endif
