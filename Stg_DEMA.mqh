@@ -31,15 +31,6 @@ INPUT ENUM_IDATA_SOURCE_TYPE DEMA_Indi_DEMA_SourceType = IDATA_BUILTIN;  // Sour
 
 // Structs.
 
-// Defines struct with default user indicator values.
-struct Indi_DEMA_Params_Defaults : IndiDEIndiMAParams {
-  Indi_DEMA_Params_Defaults()
-      : IndiDEIndiMAParams(::DEMA_Indi_DEMA_Period, ::DEMA_Indi_DEMA_MA_Shift, ::DEMA_Indi_DEMA_Applied_Price,
-                           ::DEMA_Indi_DEMA_Shift) {
-    SetDataSourceType(::DEMA_Indi_DEMA_SourceType);
-  }
-};
-
 // Defines struct with default user strategy values.
 struct Stg_DEMA_Params_Defaults : StgParams {
   Stg_DEMA_Params_Defaults()
@@ -92,8 +83,9 @@ class Stg_DEMA : public Strategy {
    * Event on strategy's init.
    */
   void OnInit() {
-    Indi_DEMA_Params_Defaults indi_dema_defaults;
-    IndiDEIndiMAParams _indi_params(indi_dema_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    IndiDEIndiMAParams _indi_params(::DEMA_Indi_DEMA_Period, ::DEMA_Indi_DEMA_MA_Shift, ::DEMA_Indi_DEMA_Applied_Price,
+                                    ::DEMA_Indi_DEMA_Shift);
+    _indi_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
     SetIndicator(new Indi_DEMA(_indi_params));
   }
 
